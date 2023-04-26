@@ -1,0 +1,47 @@
+create database propuestos;
+use propuestos;
+
+create table usuario
+(
+id_usuario int auto_increment primary key,
+username varchar(244) not null,
+password varchar(255) not null
+);
+
+insert into usuario values(null,'admin@21','12345');
+
+create table categoria
+(
+id_categoria int auto_increment primary key,
+descripcion varchar(44) not null
+);
+
+insert into categoria values(null,'Bebida');
+insert into categoria values(null,'Golosinas');
+
+create table proveedor
+(
+id_proveedor int auto_increment primary key,
+nombre varchar(44) not null,
+telefono varchar(9) not null
+);
+
+insert into proveedor values(null,'GoloPeru','999999999');
+insert into proveedor values(null,'CocaCola','999999999');
+
+create table producto
+(
+id_producto char(5) primary key,
+descripcion varchar(45) not null,
+stock int,
+precio decimal(10,2),
+id_categoria int,
+id_proveedor int,
+estado char(1) check(estado in('I','A')),
+  FOREIGN KEY (id_categoria)
+        REFERENCES categoria (id_categoria),
+         FOREIGN KEY (id_proveedor)
+        REFERENCES proveedor (id_proveedor)
+);
+
+insert into producto values("C0001",'Inka cola',23,23.3,2,2,'A');
